@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Button} from 'antd';
 import 'antd/dist/antd.css';
+import {Home} from 'page/home/home.jsx'
+import {Routers} from './router/routers.js';
 // import {BrowserRouter as Router,Route, Link} from 'react-router-dom';
 
-class Home extends React.Component{
+class Gate extends React.Component{
     // constructor(props){
     //     super(props);
     // }
@@ -12,7 +14,8 @@ class Home extends React.Component{
     render(){
         return(
             <div>
-                <Button type="primary" >hhhhhhh</Button>
+                <Routers/>
+
             </div>
         )
     }
@@ -20,7 +23,7 @@ class Home extends React.Component{
 
 
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+ReactDOM.render(<Gate />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
