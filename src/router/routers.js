@@ -1,5 +1,6 @@
 import React from 'react';
 import {Router, Route,Link} from 'react-router-dom';
+import {Form} from 'antd';
 import Login from '../page/base/login.jsx';
 import createBrowserHistory from "history/createBrowserHistory";
 // // 用户管理
@@ -16,11 +17,12 @@ export class Routers extends React.Component{
 
 
     render(){
+        const WrappedLogin = Form.create({ name: 'login' })(Login);
         return(
      <div>
          <Router history={customHistory}>
     
-         <Route path="/" component={Login}/>
+             <Route path="/" component={WrappedLogin}/>
          </Router>
          
      </div>
