@@ -7,10 +7,19 @@
 
 }
 
-.login-content{
+.login-content-a{
     box-shadow: 0,0,5px;
     background: rgba(230,230,250,0.7);
     padding: 20px;
+    border-radius: 5%;
+}
+
+.login-content-b{
+    margin-top: 10px;
+    box-shadow: 0,0,5px;
+    background: rgba(230,230,250,0.7);
+    padding: 20px;
+    text-align: center;
     border-radius: 5%;
 }
 .login-btn{
