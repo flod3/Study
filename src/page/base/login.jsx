@@ -12,8 +12,9 @@ export default class Login extends React.Component{
     constructor(props){
         super(props);
        this.state={
-           show : false
+           show : true
        }
+     
     }
 
      onChange() {
@@ -22,60 +23,112 @@ export default class Login extends React.Component{
         })
     }
 
+
+    loginCol(){
+
+      const { getFieldDecorator } = this.props.form;
+      return(
+        <Col className="login-content-a" span={6} offset={9} key ="login">
+        Username
+        <QueueAnim type="bottom">
+      <FormItem hasFeedback key="1">
+                {getFieldDecorator('username', {
+                  rules: [
+                    { pattern: regExpConfig.policeNo, message: '账号4-10位数字或字母组成' },
+                  ],
+                })(<Input addonBefore={<Icon type="user" />}  type="text" />)}
+      </FormItem>
+     
+      Password
+    
+     <FormItem hasFeedback key = '2'>
+                {getFieldDecorator('password', {
+                  rules: [
+                    { pattern: regExpConfig.pwd, message: '密码由6-16位数字或者字母组成' },
+                  ],
+                })(<Input addonBefore={<Icon type="lock" />} type="text" />)}
+      </FormItem>
+      </QueueAnim>
+      <Button size="large" className="login-btn">login</Button>
+           
+           <Button type="dashed" className="login-btn" onClick={this.onChange.bind(this)}>Create an account</Button> 
+         
+            
+           
+     </Col>
+      )
+    }
+
+    signinCol(){
+
+      const { getFieldDecorator } = this.props.form;
+      return(
+        <Col className="login-content-a" span={6} offset={9} key ="sigin">
+     <QueueAnim type="bottom">
+        Username
+      <FormItem hasFeedback key="1">
+                {getFieldDecorator('s_username', {
+                  rules: [
+                    { pattern: regExpConfig.policeNo, message: '账号4-10位数字或字母组成' },
+                  ],
+                })(<Input addonBefore={<Icon type="user" />}  type="text" />)}
+      </FormItem>
+
+      EMail address
+    
+    <FormItem hasFeedback key="2">
+               {getFieldDecorator('s_email', {
+                 rules: [
+                   { pattern: regExpConfig.isEmial, message: '输入正确邮箱格式' },
+                 ],
+               })(<Input addonBefore={<Icon type="mail" />} type="email" />)}
+     </FormItem>
+  
+      Password
+    
+     <FormItem hasFeedback key="3">
+                {getFieldDecorator('s_password', {
+                  rules: [
+                    { pattern: regExpConfig.pwd, message: '密码由6-16位数字或者字母组成' },
+                  ],
+                })(<Input addonBefore={<Icon type="lock" />} type="text" />)}
+        </FormItem>
+        </QueueAnim>
+       <Button size="large" className="login-btn">sign up</Button>
+       
+       <Button type="dashed" className="login-btn" onClick={this.onChange.bind(this)}>aleady have an account</Button> 
+            
+     </Col>
+      )
+    }
+
     render(){
 
-        const { getFieldDecorator } = this.props.form;
-        
         return(
             <div className="LoginContainer">
-                
-           
                 <div className='content'>
                     <Row>
-                    <Button type="primary" onClick={this.onChange.bind(this)}>show</Button>
                      <QueueAnim className="demo-content" type={['left','right']} 
                       ease={['easeOutQuart', 'easeInOutQuart']}
-                      leaveReverse
+                      
                    >
                     {
                         this.state.show?[  
-                        <Col className="login-content-a" span={6} offset={9} key ="main">
-                        
-                        Username
-                        <QueueAnim className="demo-content" type={['left','right']} 
-                      ease={['easeOutQuart', 'easeInOutQuart']}
-                   >{
-                    this.state.show?[  
-                  
-                      <FormItem hasFeedback >
-                                {getFieldDecorator('username', {
-                                  rules: [
-                                    { pattern: regExpConfig.policeNo, message: '账号4-10位数字或字母组成' },
-                                  ],
-                                })(<Input addonBefore={<Icon type="user" />}  type="text" />)}
-                      </FormItem>
-                    ] : null
-                       }
-                      </QueueAnim>
-                      Password
-                     <FormItem hasFeedback key = 'b'>
-                                {getFieldDecorator('password', {
-                                  rules: [
-                                    { pattern: regExpConfig.pwd, message: '密码由6-16位数字或者字母组成' },
-                                  ],
-                                })(<Input addonBefore={<Icon type="lock" />} type="text" />)}
-                      </FormItem>
-                      <Button size="large" className="login-btn">sign in</Button>
-               
-                     </Col>
+                          this.loginCol()
                          ] : null
                     }
-                     </QueueAnim>
-                     <Col className="login-content-b"  span={6} offset={9}>
-                            Don't have account? <br/>
-                            <Button className="login-btn">Sign up!</Button> 
-                     </Col>
-      
+                     </QueueAnim> 
+                     <QueueAnim className="demo-content" type={['left','right']} 
+                      ease={['easeOutQuart', 'easeInOutQuart']}
+                      
+                   >
+                    {
+                        this.state.show?[  
+                          null
+                         ] : this.signinCol()
+                    }
+                     </QueueAnim> 
+                     
                    </Row>
                 </div>
                

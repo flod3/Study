@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <title>搭建最简单的spring boot后台 + react前端</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+    </head>
+    <body>
+        <h1 id="%E6%90%AD%E5%BB%BA%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84spring-boot%E5%90%8E%E5%8F%B0--react%E5%89%8D%E7%AB%AF">搭建最简单的spring boot后台 + react前端</h1>
+<h2 id="%E7%AC%AC%E4%B8%80%E6%AD%A5-spring-boot-%E6%90%AD%E5%BB%BA">第一步 spring boot 搭建</h2>
+<ul>
+<li>
+<p><strong>打开idea</strong>    选择菜单栏里 Files -&gt; new -&gt;Project 选择<code>Spring Initializer</code><br>
+<img src="file:///home/jucheng/FrontProject/Study/build/笔记/1.png" alt=""></p>
+</li>
+<li>
+<p>点击next 选择你用的<strong>java</strong>版本 <strong>Group</strong>和<strong>Artifact</strong>是你的包名和模块名,这个对于目前学习不重要
+<img src="file:///home/jucheng/FrontProject/Study/build/笔记/2.png" alt=""></p>
+</li>
+<li>
+<p>点击next 在左侧菜单栏里选择<strong>Web</strong> -&gt; 勾选 Web
+<img src="file:///home/jucheng/FrontProject/Study/build/笔记/3.png" alt=""></p>
+</li>
+<li>
+<p>创建项目后,在右下角提示内选择<code>Enable Auto Import</code>,此时正在加载maven依赖和插件,第一次执行可能需要等几分钟
+<img src="file:///home/jucheng/FrontProject/Study/build/笔记/4.png" alt=""></p>
+</li>
+<li>
+<p>创建好后,是这样一个目录结构
+<img src="file:///home/jucheng/FrontProject/Study/build/笔记/5.png" alt=""></p>
+</li>
+<li>
+<p>在你的<strong>spring boot</strong>入口类的包下(我的是<code>com.example.yuan1</code>如图)新建一个controller包,在controller包下新建一个HelloController类. 并写入以下代码</p>
+</li>
+</ul>
+<pre><code class="language-java"><div><span class="hljs-keyword">package</span> com.example.yuan1.controller;
+<span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;
+<span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RestController;
+
+<span class="hljs-meta">@RestController</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyController</span> </span>{
+    <span class="hljs-comment">//这一行是用于接受Request请求,例如浏览器访问http://localhost:8080/hello会进入这个类</span>
+    <span class="hljs-meta">@RequestMapping</span>(value = <span class="hljs-string">"/hello"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-comment">//直接返回String显示在浏览器上</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"hello"</span>;
+    }
+}
+</div></code></pre>
+<p><img src="file:///home/jucheng/FrontProject/Study/build/笔记/6.png" alt=""></p>
+<ul>
+<li>
+<p>运行你的Application入口类的main方法,如上图所示</p>
+</li>
+<li>
+<p>访问浏览器 在地址栏输入http://localhost:8080/hello
+可以看到展示的结果</p>
+</li>
+</ul>
+<p><img src="file:///home/jucheng/FrontProject/Study/build/笔记/7.png" alt=""></p>
+<hr/>  
+<h2 id="%E9%80%9A%E8%BF%87%E5%89%8D%E7%AB%AFajax%E8%AF%B7%E6%B1%82%E8%8E%B7%E5%8F%96java%E5%90%8E%E5%8F%B0%E6%95%B0%E6%8D%AE">通过前端Ajax请求获取java后台数据</h2>
+<ul>
+<li>为了能将刚才的spring boot服务作为一个后台,我们需要对<strong>response</strong>加上跨域参数,修改<code>MyController</code>类的代码:</li>
+</ul>
+<pre><code class="language-java"><div><span class="hljs-keyword">package</span> com.example.yuan1.controller;
+<span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;
+<span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RestController;
+<span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;
+<span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;
+
+<span class="hljs-meta">@RestController</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyController</span> </span>{
+    <span class="hljs-meta">@RequestMapping</span>(value = <span class="hljs-string">"/hello"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">hello</span><span class="hljs-params">(HttpServletRequest request, HttpServletResponse response)</span></span>{
+        <span class="hljs-comment">//java 跨域请求需要配置的参数,复制这个代码块就好</span>
+        response.setHeader(<span class="hljs-string">"content-type"</span>, <span class="hljs-string">"application:json;charset=utf8"</span>);
+        response.setHeader(<span class="hljs-string">"Access-Control-Allow-Origin"</span>, <span class="hljs-string">"*"</span>);
+        response.setHeader(<span class="hljs-string">"Access-Control-Allow-Methods"</span>, <span class="hljs-string">"GET"</span>);
+        response.setHeader(<span class="hljs-string">"Access-Control-Allow-Headers"</span>, <span class="hljs-string">"x-requested-with,content-type"</span>);
+        response.setContentType(<span class="hljs-string">"text/html"</span>);
+
+
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"hello"</span>;
+    }
+}
+
+</div></code></pre>
+<p><img src="file:///home/jucheng/FrontProject/Study/build/笔记/8.png" alt=""></p>
+<ul>
+<li>接下来 我们新建一个html 通过ajax请求获取后台数据 代码如下</li>
+</ul>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"utf-8"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://code.jquery.com/jquery-3.3.1.min.js"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/javascript"</span>&gt;</span><span class="javascript">
+      
+       <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showAritcle</span>(<span class="hljs-params"></span>)</span>{
+           <span class="hljs-keyword">var</span> text =  <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'text'</span>);
+           $.ajax({
+               <span class="hljs-attr">url</span>:<span class="hljs-string">"http://localhost:8080/hello"</span>,
+               <span class="hljs-attr">method</span>:<span class="hljs-string">"GET"</span>,
+               <span class="hljs-attr">async</span>:<span class="hljs-literal">false</span>,
+               <span class="hljs-attr">success</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>)</span>{
+                   text.innerHTML=data;
+               },
+               <span class="hljs-attr">error</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>)</span>{
+                   alert(<span class="hljs-string">"error"</span>);
+               }
+           })
+       }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span>  <span class="hljs-attr">onclick</span>=<span class="hljs-string">"showAritcle()"</span>&gt;</span>clickme and show text<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"text"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<ul>
+<li>运行结果如下</li>
+</ul>
+<p><img src="file:///home/jucheng/FrontProject/Study/build/笔记/9.png" alt=""></p>
+<p><img src="file:///home/jucheng/FrontProject/Study/build/笔记/10.png" alt=""></p>
+
+    </body>
+    </html>

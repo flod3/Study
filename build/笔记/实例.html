@@ -1,0 +1,37 @@
+<html lang="en">
+<meta charset="utf-8">
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      
+       function showAritcle(){
+           var hcode =  document.getElementById('code');
+           var hname = document.getElementById('name');
+           var hsex = document.getElementById('sex');
+           $.ajax({
+               url:"http://localhost:8080/hello",
+               method:"GET",
+               async:false,
+               success:function(data){
+                   
+                   var code = data.code;
+                   var name = data.name;
+                   var sex = data.sex;
+                hcode.innerHTML=code;
+                hname.innerHTML=name;
+                hsex.innerHTML= sex;
+                
+               },
+               error:function(data){
+                   alert("error");
+               }
+               
+           })
+       }
+    </script>
+</head>
+    <button  onclick="showAritcle()">clickme and show text</button>
+    序号是: <span id="code"></span>   <br>
+    名字是: <span id="name"></span><br>
+    性别是: <span id="sex"></span><br>
+</html>

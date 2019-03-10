@@ -1,0 +1,43 @@
+<html lang="en">
+<meta charset="utf-8">    
+<head>
+        <!-- 导入Jquery -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            function showMessage(){
+                var hid = document.getElementById("id");
+                var hname = document.getElementById("name");
+                var hage = document.getElementById("age");
+                var hsex = document.getElementById("sex");
+
+
+                    // JSON 非常重要,,是前后端沟通的语言
+                // 发送一个ajax请求  前端获取后端  前端控制后端
+                $.ajax({
+                    url : "http://localhost:8080/yuan",
+                    method : "GET",  
+                    data :{name : "赵牛逼"},
+                    async : true,
+                    success: function(data){
+                        hid.innerHTML=data.id;
+                       hname.innerHTML=data.name;
+                       hage.innerHTML=data.age;
+                       hsex.innerHTML=data.sex;
+                    },
+                    error:function(data){
+                        alert("error");
+                    }
+                })
+            }
+        </script>
+</head>
+
+<body>
+    <button onclick="showMessage()">点我显示信息</button> <br>
+    id 是 : <span id="id"></span> <br>
+    姓名是 : <span id="name"></span> <br>
+    年龄是 : <span id="age"></span> <br>
+    性别是 : <span id="sex"></span><br>
+</body>
+
+</html>
