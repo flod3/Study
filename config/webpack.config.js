@@ -266,7 +266,8 @@ module.exports = function(webpackEnv) {
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
         'page' : path.join(__dirname,'../src/page'),
-        '@routers' : path.join(__dirname,'../src/router'),
+        'home' : path.join(__dirname,'../src/page/home'),
+        'routers' : path.join(__dirname,'../src/router'),
 
       },
       plugins: [

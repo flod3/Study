@@ -31,7 +31,7 @@ export default class Login extends React.Component{
         <Col className="login-content-a" span={6} offset={9} key ="login">
         Username
         <QueueAnim type="bottom">
-      <FormItem hasFeedback key="1">
+        <FormItem hasFeedback key="1">
                 {getFieldDecorator('username', {
                   rules: [
                     { pattern: regExpConfig.policeNo, message: '账号4-10位数字或字母组成' },
