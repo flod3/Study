@@ -1,32 +1,31 @@
 
 export const sidebar=[
     {
-        key : "1",
-        value : "haha",
+        key : "workstation",
+        title : "工作站",
         child : [
             {
-                key : '2',
-                value : 'lala'
+                key : "chart",
+                title : "统计表"
             },
             {
-                key : '3',
-                value : 'fafa'
+                key : "editor",
+                title : "编辑器"
             }
         ]
     },
     {
-        key : '4',
-        value : 'kaka'
-    },
-    {
-        key : '5',
-        value : '媛媛',
+        key : "datas",
+        title : "基础数据",
         child : [
             {
-                key : '6',
-                value : '媛媛男朋友'
+                key : "person",
+                title : "员工信息"
+            },
+            {
+                key : "matarial",
+                title : "进货信息"
             }
         ]
     }
-    
 ]

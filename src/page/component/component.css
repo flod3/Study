@@ -1,0 +1,9 @@
+.sidebar{
+    position: fixed;
+    top : 100px;
+}
+
+.icon{
+    border: 1px solid;
+    height: 100px;
+}
