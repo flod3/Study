@@ -1,5 +1,5 @@
 import React from 'react';
-import './login.css';
+import './base.css';
 import 'antd/dist/antd.css';
 import {Row,Col,Button,Form,Input,Icon} from 'antd';
 import {regExpConfig} from '../../config/regular.config.js'

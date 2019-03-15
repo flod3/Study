@@ -1,9 +1,26 @@
 .sidebar{
     position: fixed;
+    width: 200px;
     top : 100px;
+}
+.topbar{
+    position: absolute;
+    height: 100px;
+    
 }
 
 .icon{
-    border: 1px solid;
+    width: 100px;
     height: 100px;
+}
+
+.CollapseBtn{
+    width: 200px;
+}
+
+.topbar img{
+    position: relative;
+    left:200px;
+    width: 300px;
+  
 }
