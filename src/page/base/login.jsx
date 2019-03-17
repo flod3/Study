@@ -1,5 +1,5 @@
 import React from 'react';
-import './base.css';
+import './login.css';
 import 'antd/dist/antd.css';
 import {Row,Col,Button,Form,Input,Icon} from 'antd';
 import {regExpConfig} from '../../config/regular.config.js'
@@ -126,7 +126,7 @@ export default class Login extends React.Component{
                         this.state.show?[  
                           null
                          ] : this.signinCol()
-                    }
+                    }  
                      </QueueAnim> 
                      
                    </Row>
@@ -136,3 +136,4 @@ export default class Login extends React.Component{
         )
     }
 }
+

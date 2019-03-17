@@ -5,8 +5,9 @@ import Login from '../page/base/login.jsx';
 import {Frame} from "component/frame.jsx";
 import {Home} from "base/home.jsx";
 import {Hello} from "base/haha.js";
+import {Matarial} from "base/matarial.jsx";
 import {Chart} from "base/chart.jsx";
-import {Person} from 'base/person.jsx';
+import Person from 'base/person.jsx';
 import createBrowserHistory from "history/createBrowserHistory";
 // // 用户管理
 // const login = (location, cb) => {
@@ -32,6 +33,7 @@ export class Routers extends React.Component{
               <Route path="/haha" component={Hello}/>
               <Route path="/chart" component={Chart}/>
               <Route path="/login" component={WrappedLogin}/>
+              <Route path="/matarial" component={Matarial}/>
           </div>
              
          </Router>
