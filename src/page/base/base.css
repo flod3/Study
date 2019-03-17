@@ -35,7 +35,7 @@
     left:200px;
     width: 80%;
     overflow: visible;
-    background: url("http://localhost:3000/images/border.png");
+    background: url("http://47.101.57.84:3000/images/border.png");
     background-size: cover;
 
 }
