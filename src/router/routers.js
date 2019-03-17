@@ -7,6 +7,7 @@ import {Home} from "base/home.jsx";
 import {Hello} from "base/haha.js";
 import {Matarial} from "base/matarial.jsx";
 import {Chart} from "base/chart.jsx";
+import Editor from 'base/editor.jsx'
 import Person from 'base/person.jsx';
 import createBrowserHistory from "history/createBrowserHistory";
 // // 用户管理
@@ -34,6 +35,7 @@ export class Routers extends React.Component{
               <Route path="/chart" component={Chart}/>
               <Route path="/login" component={WrappedLogin}/>
               <Route path="/matarial" component={Matarial}/>
+              <Route path="/editor" component={Editor}/>
           </div>
              
          </Router>

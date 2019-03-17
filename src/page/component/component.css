@@ -1,10 +1,9 @@
 .sidebar{
-    position: fixed;
     width: 200px;
-    top : 100px;
+    float: left;
 }
 .topbar{
-    position: absolute;
+    position: relative;
     height: 100px;
     
 }
@@ -20,7 +19,8 @@
 
 .topbar img{
     position: relative;
-    left:200px;
-    width: 300px;
+    top: -50px;
+    width: 200px;
+    height: 200px;
   
 }

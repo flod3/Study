@@ -1,5 +1,5 @@
 import React from 'react';
-import {Menu,Col,Row,Icon,message, Button} from 'antd';
+import {Menu,Col,Row,Icon,message, Button,Affix} from 'antd';
 import {Link} from 'react-router-dom';
 import 'antd/dist/antd.css';
 import {sidebar} from '../../json/menu.js';
@@ -63,7 +63,9 @@ export class Frame extends React.Component{
                 <div className="topbar">
                         <img src="http://localhost:3000/images/title.png" ></img>
                 </div>
+                
                 {/* <Button type="primary" className="CollapseBtn"  onClick={this.Menu_Collapsed}></Button> */}
+                <Affix offsetTop="10">
                 <Menu
                     defaultOpenKeys={[this.props.defaultOpenKey]}
                     defaultSelectedKeys={[this.props.defaultSelectedKey]}
@@ -74,6 +76,7 @@ export class Frame extends React.Component{
                     {this.getNodes(sidebar)}
 
                 </Menu>
+                </Affix>
             </div>
         )
     }

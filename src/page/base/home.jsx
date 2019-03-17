@@ -2,7 +2,7 @@ import React from 'react';
 import {Frame} from 'component/frame.jsx'
 
 import createBrowserHistory from "history/createBrowserHistory";
-
+import './base.css'
 const customHistory = createBrowserHistory();
 export class Home extends React.Component{
     constructor(props){
@@ -18,9 +18,9 @@ export class Home extends React.Component{
         return (
             <div>
                 <Frame history={customHistory}/>
-                <div className="home_content">
-                    
-                </div>                
+                <div className="bgimg">
+                dd
+                    </div>          
             </div>
         )
     }

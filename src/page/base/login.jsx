@@ -1,18 +1,21 @@
 import React from 'react';
 import './login.css';
 import 'antd/dist/antd.css';
-import {Row,Col,Button,Form,Input,Icon} from 'antd';
+import {Row,Col,Button,Form,Input,Icon,message} from 'antd';
 import {regExpConfig} from '../../config/regular.config.js'
 import QueueAnim from 'rc-queue-anim';
+import createBrowserHistory from "history/createBrowserHistory";
 
+const customHistory = createBrowserHistory();
 const FormItem = Form.Item;
-
 export default class Login extends React.Component{
    
     constructor(props){
         super(props);
        this.state={
-           show : true
+           show : true,
+           l_username : null,
+           l_password : null
        }
      
     }
@@ -23,6 +26,18 @@ export default class Login extends React.Component{
         })
     }
 
+    onSubmit = (e) => {
+      e.preventDefault();
+      this.props.form.validateFields((err, values) => {
+        if (!err&&values.username!=undefined&&values.password!=undefined) {
+          window.location.href = 'http://localhost:3000/home';
+        }else{
+         message.warn('请输入正确的用户名和密码');
+        }
+      });
+    }
+
+
 
     loginCol(){
 
@@ -30,8 +45,10 @@ export default class Login extends React.Component{
       return(
         <Col className="login-content-a" span={6} offset={9} key ="login">
         Username
+         <Form onSubmit = {this.onSubmit} method="GET" >
         <QueueAnim type="bottom">
-        <FormItem hasFeedback key="1">
+        
+        <FormItem hasFeedback key="1" >
                 {getFieldDecorator('username', {
                   rules: [
                     { pattern: regExpConfig.policeNo, message: '账号4-10位数字或字母组成' },
@@ -48,11 +65,12 @@ export default class Login extends React.Component{
                   ],
                 })(<Input addonBefore={<Icon type="lock" />} type="text" />)}
       </FormItem>
+      
       </QueueAnim>
-      <Button size="large" className="login-btn">login</Button>
+      <Button size="large" className="login-btn" htmlType="submit" >login</Button>
            
            <Button type="dashed" className="login-btn" onClick={this.onChange.bind(this)}>Create an account</Button> 
-         
+         </Form>
             
            
      </Col>

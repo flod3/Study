@@ -26,16 +26,28 @@
     margin: 2px auto;
 }
 
+
 .home_content{
     position: relative;
-    top:100px;
+    padding-top: 200px;
+    padding-left: 100px;
+    padding-right: 50px;
     left:200px;
-    height: 100%;
     width: 80%;
-    border: 1px solid;
+    overflow: visible;
+    background: url("http://localhost:3000/images/border.png");
+    background-size: cover;
+
 }
 
 .pserson_table{
     padding: 20px;
     
 }
+
+.chartpage{
+    height: 500px;
+    width: 100%;
+}
+
+
