@@ -1,7 +1,8 @@
 import React from 'react';
-import {Frame} from 'component/frame.jsx'
-
+import {TopBar} from 'component/topbar.jsx'
+import {SideBar} from 'component/sidebar.jsx'
 import createBrowserHistory from "history/createBrowserHistory";
+import {Row,Col} from 'antd'
 import './base.css'
 const customHistory = createBrowserHistory();
 export class Home extends React.Component{
@@ -17,10 +18,19 @@ export class Home extends React.Component{
     render(){
         return (
             <div>
-                <Frame history={customHistory}/>
-                <div className="bgimg">
-                dd
-                    </div>          
+                <TopBar/>
+                <Row>
+                    <Col span={6}>
+                       <SideBar/>
+                    </Col>
+                    <Col span={18}>
+                        <div className="bgimg">
+                        dd
+                    </div>      
+                    </Col>
+                </Row>
+                
+                   
             </div>
         )
     }

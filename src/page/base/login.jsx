@@ -30,7 +30,7 @@ export default class Login extends React.Component{
       e.preventDefault();
       this.props.form.validateFields((err, values) => {
         if (!err&&values.username!=undefined&&values.password!=undefined) {
-          window.location.href = 'http://47.101.57.84:3000/home';
+          window.location.href = 'http://localhost:3000/home';
         }else{
          message.warn('请输入正确的用户名和密码');
         }

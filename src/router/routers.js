@@ -2,7 +2,6 @@ import React from 'react';
 import {Router, Route,Link,Switch} from 'react-router-dom';
 import {Form} from 'antd';
 import Login from '../page/base/login.jsx';
-import {Frame} from "component/frame.jsx";
 import {Home} from "base/home.jsx";
 import {Hello} from "base/haha.js";
 import {Matarial} from "base/matarial.jsx";

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import {Frame} from 'component/frame.jsx';
 import createBrowserHistory from "history/createBrowserHistory";
+import { TopBar } from 'component/topbar.jsx'
+import { SideBar } from 'component/sidebar.jsx'
+import { Row, Col } from 'antd'
 import { Editor, EditorState, RichUtils } from 'draft-js'
 import 'draft-js/dist/Draft.css'
 import './editor.css';
@@ -81,36 +83,44 @@ export default class app extends Component {
     }
 
     return (
-        <div>
- <Frame history={customHistory} defaultOpenKey="workstation" defaultSelectedKey="editor"/>
-       <div className="home_content">
-      <div className="RichEditor-root">
-         
-              
-        <BlockStyleControls
-          editorState={editorState}
-          onToggle={this.toggleBlockType}
-        />
-        <InlineStyleControls
-          editorState={editorState}
-          onToggle={this.toggleInlineStyle}
-        />
-        <div className={className} onClick={this.focus}>
-          <Editor
-            blockStyleFn={getBlockStyle}
-            customStyleMap={styleMap}
-            editorState={editorState}
-            handleKeyCommand={this.handleKeyCommand}
-            onChange={this.onChange}
-            onTab={this.onTab}
-            placeholder="Tell a story..."
-            // ref="editor"
-            ref={(c) => { this.editor = c }}
-            spellCheck
-          />
+      <div>
+        <TopBar></TopBar>
+        <Row>
+          <Col span={3}>
+            <SideBar history={customHistory} defaultOpenKey="workstation" defaultSelectedKey="editor" />
+          </Col>
+          <Col span={21}>
+          <div className="home_content">
+          <div className="RichEditor-root">
+
+
+            <BlockStyleControls
+              editorState={editorState}
+              onToggle={this.toggleBlockType}
+            />
+            <InlineStyleControls
+              editorState={editorState}
+              onToggle={this.toggleInlineStyle}
+            />
+            <div className={className} onClick={this.focus}>
+              <Editor
+                blockStyleFn={getBlockStyle}
+                customStyleMap={styleMap}
+                editorState={editorState}
+                handleKeyCommand={this.handleKeyCommand}
+                onChange={this.onChange}
+                onTab={this.onTab}
+                placeholder="Tell a story..."
+                // ref="editor"
+                ref={(c) => { this.editor = c }}
+                spellCheck
+              />
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+       
       </div>
     );
   }
@@ -133,7 +143,7 @@ class StyleButton extends React.Component {
     }
 
     return (
-        
+
       <span className={className} onMouseDown={this.onToggle}>
         {this.props.label}
       </span>
@@ -163,10 +173,10 @@ const BlockStyleControls = (props) => {
     .getType();
 
   return (
-      
+
     <div className="RichEditor-controls">
-    
-       {BLOCK_TYPES.map(type =>
+
+      {BLOCK_TYPES.map(type =>
         (<StyleButton
           key={type.label}
           active={type.style === blockType}
@@ -174,7 +184,7 @@ const BlockStyleControls = (props) => {
           onToggle={props.onToggle}
           style={type.style}
         />))}
-     
+
     </div>
   );
 };
@@ -190,16 +200,16 @@ const InlineStyleControls = (props) => {
   const currentStyle = props.editorState.getCurrentInlineStyle();
   return (
     <div className="RichEditor-controls">
-        
-          {INLINE_STYLES.map(type =>
-           (<StyleButton
-             key={type.label}
-             active={currentStyle.has(type.style)}
-             label={type.label}
-             onToggle={props.onToggle}
-            style={type.style}
+
+      {INLINE_STYLES.map(type =>
+        (<StyleButton
+          key={type.label}
+          active={currentStyle.has(type.style)}
+          label={type.label}
+          onToggle={props.onToggle}
+          style={type.style}
         />))}
-      </div>
-  
+    </div>
+
   );
 };

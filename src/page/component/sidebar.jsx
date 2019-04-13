@@ -10,7 +10,7 @@ import {faAddressBook,faUser,faHome,faThLarge,faSearch,faBath} from  '@fortaweso
 const SubMenu = Menu.SubMenu;
 
 
-export class Frame extends React.Component{
+export class SideBar extends React.Component{
 
     constructor(props){
         super(props);
@@ -39,13 +39,11 @@ export class Frame extends React.Component{
                       <SubMenu key = {side.key}  title={<span><Icon><FontAwesomeIcon icon={side.icon} /></Icon><span>{side.title}</span></span>}>
                            {childmenu.map((child)=>{
                               return(
-                             
                                       <Menu.Item key={child.key} >
                                          <Link to={child.key} >  
                                              <span><Icon><FontAwesomeIcon icon={child.icon} /></Icon><span>{child.title}</span></span>
                                           </Link>
                                       </Menu.Item>
-                                
                               ) 
                            })}
                       </SubMenu>
@@ -60,22 +58,20 @@ export class Frame extends React.Component{
         return(
 
             <div>
-                <div className="topbar">
-                        <img src="http://localhost:3000/images/title.png" ></img>
-                </div>
                 
                 {/* <Button type="primary" className="CollapseBtn"  onClick={this.Menu_Collapsed}></Button> */}
-                <Affix offsetTop="10">
-                <Menu
+                <Affix >
+                
+                 <Menu
                     defaultOpenKeys={[this.props.defaultOpenKey]}
                     defaultSelectedKeys={[this.props.defaultSelectedKey]}
                     inlineCollapsed = {this.state.collapsed}
-                    className = "sidebar"
                     mode ="inline"
                 >
                     {this.getNodes(sidebar)}
 
-                </Menu>
+                </Menu> 
+              
                 </Affix>
             </div>
         )

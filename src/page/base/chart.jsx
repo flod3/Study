@@ -1,7 +1,9 @@
 import React, { Component } from "react"
-import {Frame} from 'component/frame.jsx';
+import {TopBar} from 'component/topbar.jsx'
+import {SideBar} from 'component/sidebar.jsx'
 import createBrowserHistory from "history/createBrowserHistory";
 import echarts from 'echarts'
+import {Row,Col} from 'antd'
 
 const customHistory = createBrowserHistory();
 
@@ -76,11 +78,19 @@ export class Chart extends Component {
     render(){
         return(
             <div>
-              <Frame history={customHistory} defaultOpenKey="workstation" defaultSelectedKey="chart"/>
-               <div className="home_content">
-              
-                 <div className="chartpage" ref={c => this.chart = c} />
+              <TopBar/>
+              <Row>
+                <Col span={3}>
+                  <SideBar history={customHistory} defaultOpenKey="workstation" defaultSelectedKey="chart"/>
+                </Col>
+                <Col span={21}>
+                   <div className="home_content">
+                      <div className="chartpage" ref={c => this.chart = c} />
                   </div>
+                </Col>
+              </Row>
+
+            
                    
             </div>
         )
